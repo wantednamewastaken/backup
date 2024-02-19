@@ -1,0 +1,4 @@
+https://dotfiles.github.io/tutorials/
+https://www.anand-iyer.com/blog/2018/a-simpler-way-to-manage-your-dotfiles/
+https://mypy.readthedocs.io/en/latest/cheat_sheet_py3.html
+https://book.pythontips.com/en/latest/decorators.html
