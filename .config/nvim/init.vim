@@ -1,11 +1,15 @@
 "source $VIMRUNTIME/defaults.vim
+""" fenc might be pointless, just trying to fix shit"""
+set fenc=utf-8
 
 if exists('g:vscode')
     "
 else
     "Preceding dots
     set listchars=space:·,tab:··
-    set list!
+    "set listchars=space:·,tab:*, leadmultispace:d , " eol:↴▏
+    "set leadmultispace='\u258F'
+    set list
     set tw=180
 
     autocmd BufReadPost *
@@ -69,7 +73,7 @@ Plug 'ThePrimeagen/harpoon'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-lualine/lualine.nvim'
     Plug 'nvim-tree/nvim-web-devicons'
-Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.5' }
+Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.6' }
     Plug 'nvim-treesitter/nvim-treesitter'
     Plug 'sharkdp/fd'
     Plug 'BurntSushi/ripgrep'
@@ -87,6 +91,14 @@ filetype plugin on
 filetype indent on
 syntax on
 set number
+
+" Move to the next buffer
+nmap <tab> :bnext<CR>
+" Move to the previous buffer
+nmap <s-tab> :bprev<CR>
+
+set splitbelow
+set splitright
 
 " Fold settings
 set foldmethod=indent
@@ -106,9 +118,9 @@ vnoremap <A-k> :m '<-2<CR>gv=gv
 "            \ pumvisible() ? \"\<C-n" : \"\<TAB>"
 "set instead of let?
 "let mapleader='\'
+let mapleader=';'
 "let maplocalleader=something
 "Also available is 'resize' (res), 'vertical resize'
-nnoremap <leader>so :source $MYVIMRC<CR>
 nnoremap <Leader><left> :50winc <<cr>
 nnoremap <Leader><right> :50winc ><cr>
 nnoremap <Leader><up> :5winc -<cr>
@@ -131,6 +143,7 @@ map <Leader>t :TransparentToggle<cr>
 "nmap F :Files 
 " set NERDTree remap
 
+nnoremap <leader>so :source $MYVIMRC<CR>
 """BUFFERS"""
 "nnoremap <Leader><f> :lua require("harpoon.mark").add_file()<cr>
 map <Leader>h :lua require("harpoon.ui").toggle_quick_menu()<cr>
@@ -303,9 +316,9 @@ local theme = {
     --c = { fg = colors.black, bg = colors.deepblue },
     z = { fg = colors.white, bg = colors.black },
   },
-  insert = { a = { fg = colors.black, bg = colors.light_green } },
+  insert = { a = { fg = colors.black, bg = col.sapphire } },
   visual = { a = { fg = colors.black, bg = colors.orange } },
-  replace = { a = { fg = colors.black, bg = colors.green } },
+  replace = { a = { fg = colors.black, bg = colors.peach } },
 }
 
 local empty = require('lualine.component'):extend()
