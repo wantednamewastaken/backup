@@ -30,6 +30,16 @@ config.keys = {
     mods = 'ALT',
     action = wezterm.action.ToggleFullScreen,
   },
+  {
+      key = 'V',
+      mods = 'CTRL',
+      action = wezterm.action.PasteFrom 'Clipboard',
+  },
+  {
+      key = 'C',
+      mods = 'CTRL',
+      action = wezterm.action.CopyTo 'ClipboardAndPrimarySelection',
+  },
 }
 
 

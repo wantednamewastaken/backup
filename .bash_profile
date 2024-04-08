@@ -24,3 +24,5 @@
 
 #PATH="$PATH:/home/ryan/.cargo/bin:/home/ryan/scripts:/usr/local/go/bin"
 . "$HOME/.cargo/env"
+
+export TEST="DISPLAY=:0 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus"

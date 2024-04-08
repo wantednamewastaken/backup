@@ -91,6 +91,7 @@ filetype plugin on
 filetype indent on
 syntax on
 set number
+set confirm
 
 " Move to the next buffer
 nmap <tab> :bnext<CR>
@@ -144,6 +145,9 @@ map <Leader>t :TransparentToggle<cr>
 " set NERDTree remap
 
 nnoremap <leader>so :source $MYVIMRC<CR>
+"nnoremap <Leader>r :! \&filetype %:S<cr>
+nnoremap <Leader>r :execute '! ' . &filetype . ' ' . expand('%:S')<CR>
+"nnoremap <Leader>r :execute 'w | !' . &filetype . ' ' . expand('%:S')<CR>
 """BUFFERS"""
 "nnoremap <Leader><f> :lua require("harpoon.mark").add_file()<cr>
 map <Leader>h :lua require("harpoon.ui").toggle_quick_menu()<cr>
@@ -151,6 +155,8 @@ map <Leader>m :lua require("harpoon.mark").add_file()<cr>
 map <leader>n :bnext<cr>
 map <leader>p :bprevious<cr>
 map <leader>d :bdelete<cr>
+map <leader>c :close<cr>
+map <leader>s :vsplit<cr>
 """Quickfix"""
 map <leader>q :copen<cr>
 map <leader>v :cnext<cr>
@@ -277,8 +283,47 @@ set relativenumber
 "set laststatus=2
 "set t_Co=256
 """""""""""""""""""""""""""""""""""""""""""""""'
-
 " }}}
+
+
+" ## added by OPAM user-setup for vim / base ## 93ee63e278bdfc07d1139a748ed3fff2 ## you can edit, but keep this line
+let s:opam_share_dir = system("opam config var share")
+let s:opam_share_dir = substitute(s:opam_share_dir, '[\r\n]*$', '', '')
+
+let s:opam_configuration = {}
+
+function! OpamConfOcpIndent()
+  execute "set rtp^=" . s:opam_share_dir . "/ocp-indent/vim"
+endfunction
+let s:opam_configuration['ocp-indent'] = function('OpamConfOcpIndent')
+
+function! OpamConfOcpIndex()
+  execute "set rtp+=" . s:opam_share_dir . "/ocp-index/vim"
+endfunction
+let s:opam_configuration['ocp-index'] = function('OpamConfOcpIndex')
+
+function! OpamConfMerlin()
+  let l:dir = s:opam_share_dir . "/merlin/vim"
+  execute "set rtp+=" . l:dir
+endfunction
+let s:opam_configuration['merlin'] = function('OpamConfMerlin')
+
+let s:opam_packages = ["ocp-indent", "ocp-index", "merlin"]
+let s:opam_check_cmdline = ["opam list --installed --short --safe --color=never"] + s:opam_packages
+let s:opam_available_tools = split(system(join(s:opam_check_cmdline)))
+for tool in s:opam_packages
+  " Respect package order (merlin should be after ocp-index)
+  if count(s:opam_available_tools, tool) > 0
+    call s:opam_configuration[tool]()
+  endif
+endfor
+" ## end of OPAM user-setup addition for vim / base ## keep this line
+" ## added by OPAM user-setup for vim / ocp-indent ## 77bbe3f011055b3d1e91001219cbc423 ## you can edit, but keep this line
+if count(s:opam_available_tools,"ocp-indent") == 0
+  source "/home/ryan/.opam/default/share/ocp-indent/vim/indent/ocaml.vim"
+endif
+" ## end of OPAM user-setup addition for vim / ocp-indent ## keep this line
+
 
 lua << END
 local colors = {

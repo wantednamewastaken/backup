@@ -196,3 +196,6 @@ export VISUAL=nvim
 #neofetch
 eval "$(direnv hook zsh)"
 eval "$(zoxide init zsh)"
+
+# opam configuration
+test -r /home/ryan/.opam/opam-init/init.zsh && . /home/ryan/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
