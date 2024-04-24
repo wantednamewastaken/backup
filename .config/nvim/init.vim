@@ -138,8 +138,8 @@ nmap - :NERDTreeToggle<cr>
 nmap <F5> :noh<cr>
 "nmap w :w
 nmap Q :q<cr>
-imap jj <Esc>
-imap ff <Esc>:ALEFix<cr>
+"imap jj <Esc>
+imap jj <Esc>:ALEFix<cr>
 map <Leader>t :TransparentToggle<cr>
 "nmap F :Files 
 " set NERDTree remap

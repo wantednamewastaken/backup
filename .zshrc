@@ -170,11 +170,15 @@ if [ -f ~/.bash_functions ]; then
 	. ~/.bash_functions
 fi
 
-
 if [ -f ~/.bash_secrets ]; then
 	. ~/.bash_secrets
 fi
 
+if [ -f ~/.bash_aliases ]; then
+	. ~/.bash_aliases
+else
+    echo -e "\tNo 'bash_aliases' found"
+fi
 
 ### VIM motions MUST be set before fzf zsh files in order to get fzf history
 set -o vi
@@ -199,3 +203,6 @@ eval "$(zoxide init zsh)"
 
 # opam configuration
 test -r /home/ryan/.opam/opam-init/init.zsh && . /home/ryan/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
