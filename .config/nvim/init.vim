@@ -45,13 +45,14 @@ if (has("termguicolors"))
 endif
 
 "autocmd WinNew * wincmd L
-
+let $BASH_ENV = "~/.bash_aliases"
 
 call plug#begin('~/.vim/plugged')
 "Plug 'vim-syntastic/syntastic'
 Plug 'dense-analysis/ale'
 "Plug 'sheerun/vim-polyglot'
 Plug 'joshdick/onedark.vim'
+"Plug 'Exafunction/codeium.vim'
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug 'preservim/nerdtree'
 Plug 'morhetz/gruvbox'

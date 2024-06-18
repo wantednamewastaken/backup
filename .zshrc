@@ -176,8 +176,8 @@ fi
 
 if [ -f ~/.bash_aliases ]; then
 	. ~/.bash_aliases
-else
-    echo -e "\tNo 'bash_aliases' found"
+#else
+#    echo -e "\tNo 'bash_aliases' found"
 fi
 
 ### VIM motions MUST be set before fzf zsh files in order to get fzf history
