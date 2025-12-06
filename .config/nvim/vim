@@ -2,42 +2,50 @@
 """ fenc might be pointless, just trying to fix shit"""
 set fenc=utf-8
 
-if exists('g:vscode')
-    "
-else
-    "Preceding dots
-    set listchars=space:·,tab:··
-    "set listchars=space:·,tab:*, leadmultispace:d , " eol:↴▏
-    "set leadmultispace='\u258F'
-    set list
-    set tw=180
+"Preceding dots
+set listchars=space:·,tab:··
+"set listchars=space:·,tab:*, leadmultispace:d , " eol:↴▏
+"set leadmultispace='\u258F'
+set list
+set tw=180
 
-    autocmd BufReadPost *
-        \ if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit'
-        \ |   exe "normal! g`\""
-        \ | endif
+autocmd BufReadPost *
+    \ if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit'
+    \ |   exe "normal! g`\""
+    \ | endif
 
-    au BufNewFile,BufRead *.rs
-            \ syntax enable
-            \ | filetype plugin indent on
-            \ | set omnifunc=ale#completion#OmniFunc
-            \ | let g:ale_completion_enabled = 1
-            \ | let g:ale_completion_autoimport = 1
+au BufNewFile,BufRead *.rs
+        \ syntax enable
+        \ | filetype plugin indent on
+        \ | set omnifunc=ale#completion#OmniFunc
+        \ | let g:ale_completion_enabled = 1
+        \ | let g:ale_completion_autoimport = 1
 
-    au BufNewFile *.txt
-            \ colorscheme molokai 
-            \ | set textwidth=120
+"au BufNewFile,BufRead *.rb
+"        \ syntax enable
+"        \ | filetype plugin indent on
+"        \ | set omnifunc=syntaxcomplete#Complete
+"        \ | let g:ale_completion_enabled = 1
+"        \ | let g:ale_completion_autoimport = 1
 
-    au BufNewFile,BufRead *.py
-                \ set tabstop=4
-                \ | set softtabstop=4
-                \ | set shiftwidth=4
-                \ | set textwidth=140
-                \ | set expandtab
-                \ | set autoindent
-                \ | set fileformat=unix
-                "\ | colorscheme gruvbox
-endif
+au BufNewFile *.nix
+        \ set tabstop=2
+        \ | set softtabstop=2
+        \ | set shiftwidth=2
+
+au BufNewFile *.txt
+        \ colorscheme molokai 
+        \ | set textwidth=120
+
+au BufNewFile,BufRead *.py
+            \ set tabstop=4
+            \ | set softtabstop=4
+            \ | set shiftwidth=4
+            \ | set textwidth=140
+            \ | set expandtab
+            \ | set autoindent
+            \ | set fileformat=unix
+            "\ | colorscheme gruvbox
 
 
 if (has("termguicolors"))
@@ -79,6 +87,10 @@ Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.6' }
     Plug 'sharkdp/fd'
     Plug 'BurntSushi/ripgrep'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'ThePrimeagen/vim-be-good'
+Plug 'm4xshen/hardtime.nvim'
+    Plug 'MunifTanjim/nui.nvim'
+    Plug 'nvim-lua/plenary.nvim'
 call plug#end()
 
 
@@ -153,6 +165,8 @@ nnoremap <Leader>r :execute '! ' . &filetype . ' ' . expand('%:S')<CR>
 "nnoremap <Leader><f> :lua require("harpoon.mark").add_file()<cr>
 map <Leader>h :lua require("harpoon.ui").toggle_quick_menu()<cr>
 map <Leader>m :lua require("harpoon.mark").add_file()<cr>
+map <leader>b :Buffers<cr>
+map <leader>j :Jumps<cr>
 map <leader>n :bnext<cr>
 map <leader>p :bprevious<cr>
 map <leader>d :bdelete<cr>
@@ -162,7 +176,7 @@ map <leader>s :vsplit<cr>
 map <leader>q :copen<cr>
 map <leader>v :cnext<cr>
 map <leader>x :cprev<cr>
-map <leader>v :vim
+map <leader>v :vimgrep
 """
 "vim.lsp.buf.rename() probably useful to setup to change variable names easy
 
@@ -178,17 +192,19 @@ let g:ale_completion_enabled = 1
 "let g:ale_python_flake8_config_file = '~/.config/flake8'
 """ This is working "
 " Rest of pycodestyle config seems to work in ~/.config/pycodestyle
-let g:ale_python_flake8_options = '--max-line-length=140 --ignore=E501,E266'
+let g:ale_python_flake8_options = '--max-line-length=140 --ignore=E501,E266,W503 --extend-ignore=W503'
 "
 let g:ale_linters = {
 \   'python': ['flake8','pyright','pylsp'],
 \   'rust': ['analyzer', 'cargo', 'rls', 'rustc'],
+\   'ruby': ['rubocop'],
 \}
 " 'pylint'
 let g:ale_rust_rls_toolchain = 'stable'
 
 let g:ale_fixers = {
 \   'python': ['black','isort'],
+\   'ruby': ['rubocop'],
 \}
 
 "call ale#Set('python_flake8_options', '--config=$HOME/.config/flake8')

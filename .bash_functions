@@ -1,3 +1,5 @@
+#!/bin/bash
+
 cr="\e[31;49m"
 cb="\e[39;49m"
 cg="\e[36;49m"
@@ -213,7 +215,7 @@ mytodo() {
         less ~/notes/todo.txt
     elif [[ $1 == "-r" ]]; then
         cat ~/notes/todo.txt | shuf -n 1
-	else  
+	# else  
 	fi
 }
 

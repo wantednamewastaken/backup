@@ -109,28 +109,24 @@ alias zshconfig="v ~/.zshrc"
 #alias ohmyzsh="mate ~/.oh-my-zsh"
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias checknotifications='tail /home/ryan/notes/notifications.txt | tac | less'
-alias servercheck='~/scripts/cronjobs/remind.sh servercheck && servercpu'
-alias servercpu="ssh fedora-server 'ps -eo pid,ppid,cmd,%mem,%cpu --sort=-%cpu | head'"
+alias servercheck='~/scripts/cronjobs/remind.sh servercheck && servercpu && serverraid'
+alias servercpu="ssh debian-server 'ps -eo pid,ppid,cmd,%mem,%cpu --sort=-%cpu | head'"
+alias serverraid="ssh debian-server 'echo && echo RaidCheck && cat /proc/mdstat'"
 alias mybible='v -o /mnt/hdd/Documents/bsb-last.txt ~/notes/biblenotes.txt'
 #alias nemovids='nemo -t "/mnt/hdd/Videos/" "/mnt/hdd/Videos/Racing/" "/mnt/server-hdd/media/Videos/" &> /dev/null &'
 alias ashshutdown="ssh ashleyhp 'shutdown -h now'"
+alias nvmemount="sudo cryptsetup luksOpen /dev/nvme0n1p2 nvme0n1p2 && sudo mount -v /dev/mapper/nvme0n1p2 /mnt/nvme"
 alias jup='jupyter --no-browser'
-#alias mytmux="tmux new-session \ 
-#  send-keys \'btop\' C-m \
-#  new-window \
-#  split-window -h -p 60 \
-#  select-pane -t 0 \
-#  split-window -v -p 40 \
-#  send-keys \'top\' C-m"
 alias birthdays='bat /mnt/hdd/Desktop/BIRTHDAYS.txt'
 alias fix='sudo $(history -p !!)'
 alias o='xdg-open'
 alias meallist='cat ~/notes/meals.list | shuf -n 10'
 alias bdideas='v ~/notes/ashleybirthdayideas.txt'
 alias sudo='sudo '
-alias today='v ~/notes/today.txt'
+alias today='v ~/notes/private/today.txt'
 #alias menno10meals='find /mnt/hdd/Downloads/websitedownload/MennoniteGirls/www.mennonitegirlscancook.ca/ -type f ! -path 'search' ! -iname 'bread-for-journey*' ! -iname 'index.html' | shuf -n 10'
 alias myreminders='v ~/notes/reminders.txt'
+alias days-saved='echo $(python -c "from mypython_library import odd; days, saved_money = odd.quit_savings(quit_day=(2025,9,20)); print(f\"{days} days without and saved \${saved_money:.2f} so far.\")")'
 #alias z='v ~/.zshrc'
 #alias z='zoxide'
 #alias mytodo='v ~/notes/todo.txt'
@@ -174,11 +170,11 @@ if [ -f ~/.bash_secrets ]; then
 	. ~/.bash_secrets
 fi
 
-if [ -f ~/.bash_aliases ]; then
-	. ~/.bash_aliases
-#else
-#    echo -e "\tNo 'bash_aliases' found"
-fi
+# if [ -f ~/.bash_aliases ]; then
+# 	. ~/.bash_aliases
+# #else
+# #    echo -e "\tNo 'bash_aliases' found"
+# fi
 
 ### VIM motions MUST be set before fzf zsh files in order to get fzf history
 set -o vi

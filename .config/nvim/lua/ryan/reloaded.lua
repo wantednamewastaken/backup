@@ -1,0 +1,26 @@
+-- local function reload_module(module_name)
+--   vim.api.nvim_clear_autocmds({ group = "MyAutoCmdGroup" })
+--   package.loaded[module_name] = nil
+--   require(module_name)
+--   print("got here")
+-- end
+-- 
+-- -- Reload all your configs
+-- 
+-- -- Don't think lazy can be reloaded
+-- reload_module('config.lazy')
+-- 
+-- -- Don't think I need this
+-- -- in your reload function, before re-requiring the file
+-- --vim.api.nvim_clear_autocmds({ group = 'MyAutoCmdGroup' })
+-- reload_module('ryan.autocmds')
+-- 
+-- reload_module('ryan.extra')
+-- reload_module('ryan.keybinds')
+-- reload_module('ryan.lspconfig')
+-- reload_module('ryan.nixd')
+-- reload_module('ryan.plugins')
+-- 
+-- --reload_module('plugins.cmp')
+-- reload_module('plugins.colorschemes')
+-- reload_module('plugins.hardtime')

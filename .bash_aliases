@@ -34,12 +34,12 @@ alias zshconfig="v ~/.zshrc"
 #alias ohmyzsh="mate ~/.oh-my-zsh"
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias checknotifications='tail /home/ryan/notes/notifications.txt | tac | less'
-alias servercheck='~/scripts/cronjobs/remind.sh servercheck && servercpu'
-alias servercpu="ssh fedora-server 'ps -eo pid,ppid,cmd,%mem,%cpu --sort=-%cpu | head'"
-alias mybible='v -o /mnt/hdd/Documents/bsb-last.txt ~/notes/biblenotes.txt'
-#alias nemovids='nemo -t "/mnt/hdd/Videos/" "/mnt/hdd/Videos/Racing/" "/mnt/server-hdd/media/Videos/" &> /dev/null &'
-alias ashshutdown="ssh ashleyhp 'shutdown -h now'"
-alias jup='jupyter --no-browser'
+# alias servercheck='~/scripts/cronjobs/remind.sh servercheck && servercpu'
+# alias servercpu="ssh fedora-server 'ps -eo pid,ppid,cmd,%mem,%cpu --sort=-%cpu | head'"
+# alias mybible='v -o /mnt/hdd/Documents/bsb-last.txt ~/notes/biblenotes.txt'
+# #alias nemovids='nemo -t "/mnt/hdd/Videos/" "/mnt/hdd/Videos/Racing/" "/mnt/server-hdd/media/Videos/" &> /dev/null &'
+# alias ashshutdown="ssh ashleyhp 'shutdown -h now'"
+# alias jup='jupyter --no-browser'
 #alias mytmux="tmux new-session \ 
 #  send-keys \'btop\' C-m \
 #  new-window \
@@ -53,7 +53,6 @@ alias o='xdg-open'
 alias meallist='cat ~/notes/meals.list | shuf -n 10'
 alias bdideas='v ~/notes/ashleybirthdayideas.txt'
 alias sudo='sudo '
-alias today='v ~/notes/today.txt'
 #alias menno10meals='find /mnt/hdd/Downloads/websitedownload/MennoniteGirls/www.mennonitegirlscancook.ca/ -type f ! -path 'search' ! -iname 'bread-for-journey*' ! -iname 'index.html' | shuf -n 10'
 alias myreminders='v ~/notes/reminders.txt'
 #alias z='v ~/.zshrc'

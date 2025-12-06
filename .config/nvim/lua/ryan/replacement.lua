@@ -1,0 +1,18 @@
+--vim.api.nvim_set_keymap('n', '<leader>a', '', {
+--  noremap = true,
+--  silent = true,
+--  callback = function()
+--    -- Get the word under cursor
+--    local word = vim.fn.expand('<cword>')
+--    -- Prompt the user for the replacement
+--    local replacement = vim.fn.input('Replace "' .. word .. '" with: ')
+--    if replacement ~= nil and replacement ~= '' then
+--      -- Create a safe pattern to match the whole word
+--      local pattern = '%f[%w]' .. vim.fn.escape(word, '\\') .. '%f[%W]'
+--      -- Construct the substitution command
+--      local cmd = string.format("%%s/%s/%s/g", pattern, replacement)
+--      -- Execute the substitution
+--      vim.cmd(cmd)
+--    end
+--  end
+--})

@@ -1,0 +1,23 @@
+---vim.api.nvim_create_augroup("DiagnosticAutoOpen", { clear = true })
+---
+---vim.api.nvim_create_autocmd("CursorHold", {
+---  group = "DiagnosticAutoOpen",
+---  callback = function()
+---    local line_nr = vim.api.nvim_win_get_cursor(0)[1] - 1 -- zero-based line number
+---    local diagnostics = vim.diagnostic.get(0, { lnum = line_nr })
+---
+---    if next(diagnostics) then
+---      vim.diagnostic.open_float(nil, {
+---	  scope = "line",
+---	  focus = false,
+---	  --header = 'hi',
+---	  source = true,
+---	  border = 'shadow',
+---	  --winhighlight = 'FloatBorder:FloatBorder"'
+---      })
+---    end
+---  end,
+---})
+---
+---
+---vim.o.updatetime = 500
