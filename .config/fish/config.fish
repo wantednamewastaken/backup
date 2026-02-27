@@ -7,9 +7,12 @@ function nvmount
     # set mount_point $argv[1]
     set mount_point "/mnt/nvme"
     if mountpoint -q $mount_point
-	echo "'$mount_point' is already mounted."
+	echo -e "\n'$mount_point' is already mounted.\n"
     else
-	sudo cryptsetup luksOpen /dev/nvme0n1p2 nvme0n1p2 || sudo mount -v /dev/mapper/nvme0n1p2 /mnt/nvme
+	echo ''
+	sudo cryptsetup luksOpen /dev/nvme0n1p2 nvme0n1p2 && sudo mount -v /dev/mapper/nvme0n1p2 $mount_point
+	echo ''
+	sleep 1s
     end
 end
 
@@ -103,6 +106,7 @@ source ~/.bash_aliases
 alias zshconfig="v ~/.zshrc"
 #alias ohmyzsh="mate ~/.oh-my-zsh"
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+alias audio_check='journalctl -b -t kernel | rg "Tranya" | tail -n 1'
 alias checknotifications='tail /home/ryan/notes/notifications.txt | tac | less'
 alias servercheck='~/scripts/cronjobs/remind.sh servercheck && servercpu && serverraid'
 alias servercpu="ssh debian-server 'ps -eo pid,ppid,cmd,%mem,%cpu --sort=-%cpu | head'"
@@ -179,5 +183,7 @@ end
 if status is-interactive
     # Commands to run in interactive sessions can go here
 end
+
+# bind \ef forward-char
 
 zoxide init fish | source

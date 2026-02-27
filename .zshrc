@@ -15,7 +15,8 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="powerlevel10k/powerlevel10k"
+#
+# ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -77,8 +78,13 @@ HYPHEN_INSENSITIVE="true"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(
+    git
+    zsh-autosuggestions
+    you-should-use
+)
 
+# FIXME Turn OMZ on
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -108,6 +114,8 @@ source $ZSH/oh-my-zsh.sh
 alias zshconfig="v ~/.zshrc"
 #alias ohmyzsh="mate ~/.oh-my-zsh"
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+alias audio_check='journalctl -b -t kernel | rg "Tranya" | tail -n 1'
+alias steam_novpn="flatpak update && flatpak upgrade && nvmount; mullvad-exclude flatpak run com.valvesoftware.Steam"
 alias checknotifications='tail /home/ryan/notes/notifications.txt | tac | less'
 alias servercheck='~/scripts/cronjobs/remind.sh servercheck && servercpu && serverraid'
 alias servercpu="ssh debian-server 'ps -eo pid,ppid,cmd,%mem,%cpu --sort=-%cpu | head'"
@@ -202,3 +210,15 @@ test -r /home/ryan/.opam/opam-init/init.zsh && . /home/ryan/.opam/opam-init/init
 export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
+
+# source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=magenta'
+
+source ~/.zsh/catppuccin_mocha-zsh-syntax-highlighting.zsh
+source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# FIXME
+eval "$(oh-my-posh init zsh --config $HOME/.poshthemes/montys.omp.json)"
+# eval "$(oh-my-posh init zsh --config ~/montys.omp.json)"
+# oh-my-posh init fish --config $HOME/.poshthemes/montys.omp.json | source

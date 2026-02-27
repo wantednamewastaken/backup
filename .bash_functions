@@ -100,14 +100,29 @@ myvidswatched() {
 }
 
 
-mytmux() {
-tmux new-session \ 
-  send-keys \'btop\' C-m \
-  new-window \
-  split-window -h -p 65 \
-  select-pane -t 0 \
-  split-window -v -p 40 \
-  send-keys \'top\' C-m
+# mytmux() {
+# tmux new-session \ 
+#   send-keys \'btop\' C-m \
+#   new-window \
+#   split-window -h -p 65 \
+#   select-pane -t 0 \
+#   split-window -v -p 40 \
+#   send-keys \'top\' C-m
+# }
+
+nvmount() {
+    # command mkdir $argv
+    # set mount_point $argv[1]
+    mount_point="/mnt/nvme"
+    mountpoint -q "$mount_point"
+    if [[ "$?" -eq 0 ]]; then
+	echo -e "\n'$mount_point' is already mounted.\n"
+    else
+	echo ''
+	sudo cryptsetup luksOpen /dev/nvme0n1p2 nvme0n1p2 && sudo mount -v /dev/mapper/nvme0n1p2 $mount_point
+	echo ''
+	sleep 1s
+    fi
 }
 
 checkenv() {
